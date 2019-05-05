@@ -1,6 +1,8 @@
 # SASR
 Semi-automatic systematic review (SASR): Is a tool that allows loading a .bib file that contains bibliographic references, the loaded data is processed obtaining basic statistics and showing the results in the graphs, creating a systematic review that is easy to understand and analyze. 
 
+execute with python uploader.py
+
 # #Installation
 It is necessary to have a machine that has the following facilities:
 Python 3.0+
@@ -11,7 +13,7 @@ with this, the tool will be ready to run :)
 
 # #Configuration
 
-go to / uloader / filter
+go to / uploader / filter
 
 open blog.py
 uncomment

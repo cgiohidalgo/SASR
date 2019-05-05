@@ -1,0 +1,47 @@
+-- DROP TABLE IF EXISTS "user";
+CREATE TABLE IF NOT EXISTS "user" (
+	"id" INTEGER PRIMARY KEY,
+	"username" TEXT UNIQUE NOT NULL,
+	"password" TEXT NOT NULL
+);
+
+-- DROP TABLE IF EXISTS "group";
+CREATE TABLE IF NOT EXISTS "group" (
+	"id" INTEGER PRIMARY KEY,
+	"groupname" TEXT UNIQUE NOT NULL
+);
+
+-- DROP TABLE IF EXISTS "user_in_group";
+CREATE TABLE IF NOT EXISTS "user_in_group" (
+	"user_id" INTEGER NOT NULL
+		REFERENCES "user" ("id")
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
+	"group_id" INTEGER NOT NULL
+		REFERENCES "group" ("id")
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
+	PRIMARY KEY ("user_id", "group_id")
+		ON CONFLICT REPLACE
+);
+
+-- DROP TABLE IF EXISTS "post";
+CREATE TABLE IF NOT EXISTS "post" (
+	"id" INTEGER PRIMARY KEY,
+	"title" TEXT NOT NULL,
+	"body" TEXT,
+	"ref_date" DATE
+);
+
+DROP TABLE IF EXISTS "file";
+CREATE TABLE IF NOT EXISTS "file" (
+	"id" INTEGER PRIMARY KEY,
+	"filename" TEXT NOT NULL,
+	"post_id" INTEGER
+		DEFAULT NULL
+		REFERENCES "post" ("id")
+		ON UPDATE CASCADE
+		ON DELETE SET DEFAULT,
+	"counter" INTEGER
+		DEFAULT 0
+);

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}New post{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        <label for="title">Title</label>
+        <input name="title" id="title" value="{{ request.form["title"] }}" required>
+        <label for="date">Date</label>
+        <input name="date" id="date" type="date">
+        <label for="body">Body</label>
+        <textarea name="body" id="body">{{ request.form["body"] }}</textarea>
+        <label for="files">Files</label>
+        <input type="file" multiple name="files" id="files">
+        <input type=submit value="Save">
+    </form>
+{% endblock %}

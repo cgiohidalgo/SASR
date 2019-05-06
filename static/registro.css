@@ -1,0 +1,169 @@
+@charset "utf-8";
+fieldset > div
+{
+	text-align:center;
+}
+
+fieldset > div > input[type="email"],
+fieldset > div > input[type="password"],
+fieldset > div > input[type="text"]
+{
+	margin-bottom: 20px;
+	width: 40%;
+}
+
+footer
+{
+	display: block;
+	text-align: center;
+	
+	
+}
+
+footer > div
+{
+	border-right: 1px solid rgba(204,204,204,1);
+	display: inline-block;
+	height: 200px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+footer > div#anexo
+{
+	width: 50%;
+}
+
+footer > div#escudo
+{
+	width: 20%;
+}
+
+footer > div#nombres
+{
+	padding-right: 35px;
+	width: 25%;
+}
+
+div#nombres > ul
+{
+	list-style: none;
+}
+
+div#nombres > ul > li
+{
+	border-bottom: 1px solid rgba(204,204,204,1);
+	margin-bottom: 7px;
+	padding-bottom: 7px;
+	text-align: left;
+	vertical-align: middle;
+}
+form
+{
+	border-bottom: 1px solid rgba(104,104,104,1);
+	margin-bottom: 3px;
+	padding-bottom: 3px;
+	text-align:right;
+	vertical-align: middle;
+}
+div#logo 
+{
+	text-align:left;
+	vertical-align:central;
+	margin: 10%;
+	width: 80%;
+	background-position-x: 8;
+	float:left;
+}
+#bljaIMGte
+{
+	float:left;
+	position:absolute;
+	width:955px;
+	text-align: right;
+}
+#bljaIMGte .bljaIMGtex 
+{
+	width:380px;position:absolute;top:80px; left:24px;
+}
+	
+
+div#nombres > ul > li > a
+{
+	float: right;
+	text-align: right;
+}
+
+
+
+#informacion_integrantes,
+#informacion_usuario
+
+
+{
+	border-bottom: 1px solid rgba(153,153,153,1);
+	margin-bottom: 30px;
+	padding: 25px;
+}
+
+#texto {
+	text-align: center;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"]
+
+{
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	-ms-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	-o-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	border: 1px #999 solid;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	font-size: 16px;
+	margin-right: 15px;
+	padding: 5px;
+}
+input[type="text1"]
+
+{
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	-ms-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	-o-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	border: 1px #999 solid;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	font-size: 18px;
+	margin-right: 15px;
+	padding: 5px;
+}
+textarea[type="textarea"]
+{
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	-ms-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	-o-box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	border: 1px #999 solid;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+	font-size: 18px;
+	margin-right: 15px;
+	padding: 5px;
+}
+
+.clear
+{
+	clear:both;
+}

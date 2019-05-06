@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+
+<p>&nbsp;</p>
+<section id="principal">
+   <article>
+      <article id="inicio_sesion">
+         <form action="/login" method="POST">
+            <fieldset class="well">
+               <br><br>
+               <legend>Credentials</legend>
+               <input type="username" id="email" align="absbottom"  name="username" placeholder="Username" required>
+               <br><br>
+               <input type="password" name="password" placeholder="Password" id="password" required>
+               <br><br>
+               <input type="submit" class="btn btn-primary" value="Sign In">
+               <a class="btn btn-success" href="/register">Sign Up</a>
+            </fieldset>
+         </form>
+         <img class="logotipovighub" src="/static/logo.jpg">
+      </article>
+   </article>
+</section>
+
+{% endif %}
+{% endblock %}

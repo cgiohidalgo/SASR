@@ -1,0 +1,55 @@
+.perfil_lista {
+	display: block;
+	border-bottom: 1px solid #CCCCCC;
+	padding: 10px 0;
+}
+
+.perfil_lista:hover {
+	background: #EEE;
+}
+
+.centrado {
+	text-align: center;
+	margin: auto;
+}
+
+.img_lista {
+	max-width: 100px;
+	min-width: 100px;
+	padding: 5px;
+}
+
+.img_nav_bar {
+	max-height: 25px;
+	max-height: 25px;
+	padding: 5px;
+}
+
+.img_editar {
+	max-width: 150px;
+	min-width: 150px;
+	padding: 5px;
+}
+
+.oculto {
+	display: none;
+}
+
+.izquierda {
+	float: left;
+}
+
+.cont_img_lista {
+	margin-right: 1em;
+}
+
+.nombre_perfil_lista {
+	color: #000;
+	font-weight: bold;
+	font-size: 14pt;
+	text-shadow: 0.1em 0.1em 0.1em #EEE;
+}
+
+.username_perfil_lista {
+	
+}

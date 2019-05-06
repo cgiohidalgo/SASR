@@ -11,10 +11,13 @@ pip
 
 # #Configuration
 
-virtualenv -p python3 /.
-source bin/activate
 git clone git@github.com:cgiohidalgo/SASR.git
 cd /SARS
+sudo apt-get install python3-pip
+sudo pip3 install virtualenv 
+virtualenv venv 
+cd venv
+source bin/activate
 pip install -r requirements.txt
 
 python app.py

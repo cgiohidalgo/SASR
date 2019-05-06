@@ -25,4 +25,4 @@ http://localhost:5000
 
 CONGRATULATIONS :)
 
-![ScreenShot](https://raw.githubusercontent.com/i-saumitra/Voice-controlled-MP3-Player/master/screenshot.jpg)
+![ScreenShot](https://raw.githubusercontent.com/cgiohidalgo/SASR/master/example.png)

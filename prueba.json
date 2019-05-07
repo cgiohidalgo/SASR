@@ -1,0 +1,57 @@
+{
+ "metadata": {
+  "collection": "2",
+  "source": "2.bib",
+  "created": "2019-05-06T14:51:32.116638",
+  "records": 2
+ },
+ "records": [
+  {
+   "type": "article",
+   "id": "Diaz2015",
+   "citekey": "Diaz2015",
+   "collection": "2",
+   "title": "Presencia de las universidades espa\u00f1olas en las redes sociales digitales cient\u00edficas: caso de los estudios de comunicaci\u00f3n",
+   "year": "2015",
+   "author": [
+    {
+     "name": "D\u00edaz, Cristina Gonz\u00e1lez"
+    },
+    {
+     "name": "Garc\\\u00e1, Mar Iglesias"
+    }
+   ],
+   "journal": {
+    "name": "El profesional de la informaci\u00f3n",
+    "volume": "24",
+    "number": "5",
+    "pages": "640--647"
+   }
+  },
+  {
+   "type": "article",
+   "id": "Leon2006",
+   "citekey": "Leon2006",
+   "collection": "2",
+   "title": "Valoraci\u00f3n, selecci\u00f3n y pertinencia de herramientas de software utilizadas en vigilancia tecnol\u00f3gica",
+   "year": "2006",
+   "author": [
+    {
+     "name": "Le\u00f3n, Andr\u00e9s Mauricio"
+    },
+    {
+     "name": "Castellanos, Oscar Fernando"
+    },
+    {
+     "name": "Vargas, Freddy Abel"
+    }
+   ],
+   "journal": {
+    "name": "Ingenier\u00eda e investigaci\u00f3n",
+    "volume": "26",
+    "number": "1",
+    "pages": "92--102"
+   }
+  }
+ ]
+}

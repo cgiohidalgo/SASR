@@ -15,11 +15,13 @@ git clone git@github.com:cgiohidalgo/SASR.git
 
 cd /SARS
 
-sudo apt-get install python3-pip
+sudo apt-get install python3-pip*
 
-sudo pip3 install virtualenv 
+sudo pip3 install virtualenv* 
 
-virtualenv venv 
+virtualenv venv*
+
+* These steps are not necessary if the repository environment is activated.
 
 cd venv
 

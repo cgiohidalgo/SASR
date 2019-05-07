@@ -185,8 +185,10 @@ big.message{
 /* headings
 ------------------------*/
 
-h1{
-	font-size: 3.7em;
+
+h1 {
+    font-size: 3.7em;
+    color: currentColor;
 }
 
 h2{

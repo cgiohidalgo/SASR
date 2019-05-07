@@ -4,11 +4,43 @@
 <p>Oh no Dont show page</p>
 {% else %}
 
-<h2>Register</h2>
-<form action="/register/" method="POST">
-  <input type="username" name="username" placeholder="Username" required>
-  <input type="password" name="password" placeholder="Password" required>
-  <input type="submit" value="Log in">
-</form>
+<div id="contenedor_formulario" class="well">
+   <fieldset class="well">
+      <legend align="center">¡Sign up!</legend>
+      <div id="datos_usuario" class="span5">
+         <!--==============================================================-->
+         <!-- Datos de usuario -->
+         <!--==============================================================-->
+         <fieldset class="well-new">
+            <!--==============================================================-->
+            <!-- Titulo para el formulario -->
+            <!--==============================================================-->
+            <legend align="center">Account info</legend>
+            <div align="center" class="span4">
+               <form action="/register/" data-validate="parsley" method="POST">
+                  <input type="username" name="username" placeholder="Username" value="" size="32" data-rangelength="[5,10]" class="parsley-validated" style="margin: 10;" required>
+                  <input type="password" name="password" placeholder="Password" id="password" data-required="true" data-rangelength="[5,15]" value="" size="32" class="parsley-validated" style="margin: 10;" required>
+                  <input type="password" name="password2" id="password3" placeholder="Repeat password" required="" data-equalto="#password" data-error-message="password wrong" style="margin: 10;" class="parsley-validated">
+                  <br><br>
+                  <input type="submit" class="btn btn-primary" value="
+                     do it!">
+               </form>
+            </div>
+         </fieldset>
+      </div>
+      <div align="right" id="datos_usuario" class="span5">
+         <div class="span4">
+            <img class="logogrande" src="/static/logo2.png">
+         </div>
+      </div>
+      <input type="hidden" name="activo" value="1">
+      <input type="hidden" name="MM_insert" value="form1">
+   </fieldset>
+</div>
+
 {% endif %}
 {% endblock %}
+
+
+
+

@@ -1,13 +1,22 @@
-"""Flask Login Example and instagram fallowing find"""
-
-from flask import Flask, url_for, render_template, request, redirect, session
+import os
+from flask import Flask, flash, url_for, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
-from instagram import getfollowedby, getname
+from werkzeug import secure_filename
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['UPLOAD_FOLDER'] = './upload'
 db = SQLAlchemy(app)
+ALLOWED_EXTENSIONS = set(['bib','ris'])
+# change to "redis" and restart to cache again
+
+# some time later
+
+# All caching functions will simply call through
+# to the wrapped function, with no caching
+# (since NullCache does not cache).
+
 
 
 class User(db.Model):
@@ -31,6 +40,39 @@ def home():
 			username = getname(request.form['username'])
 			return render_template('index.html', data=getfollowedby(username))
 		return render_template('index.html')
+
+@app.route('/access', methods=['GET', 'POST'])
+def graphs():
+	""" Session control"""
+	if not session.get('logged_in'):
+		return render_template('login.html')
+	else:
+		if request.method == 'POST':
+			username = getname(request.form['username'])
+			return render_template('access.html', data=getfollowedby(username))
+		return render_template('access.html')
+
+@app.route('/coauthor', methods=['GET', 'POST'])
+def graphs1():
+	""" Session control"""
+	if not session.get('logged_in'):
+		return render_template('login.html')
+	else:
+		if request.method == 'POST':
+			username = getname(request.form['username'])
+			return render_template('coauthor.html', data=getfollowedby(username))
+		return render_template('coauthor.html')
+
+@app.route('/data', methods=['GET', 'POST'])
+def data():
+	""" Session control"""
+	if not session.get('logged_in'):
+		return render_template('login.html')
+	else:
+		if request.method == 'POST':
+			username = getname(request.form['username'])
+			return render_template('data.html', data=getfollowedby(username))
+		return render_template('data.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -67,6 +109,30 @@ def logout():
 	session['logged_in'] = False
 	return redirect(url_for('home'))
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route("/upload", methods=['POST'])
+def uploader():
+ if request.method == 'POST':
+ 	if 'archivo' not in request.files:
+ 		flash('no file part')
+ 		return 
+ 	file = request.files['archivo']
+ 	if file.filename == '':
+ 		flash('No selected file')
+ 		return 
+ 	if file and allowed_file(file.filename):
+ 		filename = secure_filename(file.filename)
+ 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+ 		#print("./upload/"+filename)
+ 		archivo = "./upload/"+filename
+ 		os.rename(archivo, "./static/upload/1.bib")
+ return render_template('index.html')
+ #return cosole.log(filename);
+
+#os.rename(a,a1)
 
 if __name__ == '__main__':
 	app.debug = True

@@ -1,24 +1,25 @@
-
+{% extends "base.html" %}
 {% block content %}
 {% if session['logged_in'] %}
    
 	{% if data %}
-	<h3>{{data}}</h3>
+
 	
 	{% else %}
 
-		<style>
+<style>
 
   html, body { overflow: hidden }
-  svg { position: fixed;
-        top: 22;
+  svg {
+        position: static;
+        top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-      }
+        height: 90%;
+    }
   
   #footer { position: fixed;
-            top: 100%
+            top: 90%
           }
   
   * {
@@ -81,460 +82,39 @@
       stroke-width: 1;
       opacity: 0.85;
   }
-
+  #pun-foot {
+background-image: url(http://i.imgur.com/6KaUhrC.jpg);
+display: none;
+padding-top: 33px;
+border-top: 11px solid rgb(216, 41, 41);
+}
 </style>
+
 <head>
       <title>SASR</title>
-      <link rel="stylesheet" href="{{ url_for("static", filename="crenesoft.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menu.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="bootstrap-responsive.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="css.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="docs.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menú-estilo.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menurapido.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="ghs.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menu_centro.css") }}">
-   </head>
-<header>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+        <META HTTP-EQUIV="Expires" CONTENT="-1">
+</head>
+   <header>
       <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
-         <div id="fa_right" class="fa_tbMainElement">
-         </div>
          <span id="fa_left" class="fa_tbMainElement">
             <a class="menu-login"></a>
-            {% if session['logged_in'] %}
-            <a href="/logout">Logout</a> You're logged in already!
-            {% else %}
-            <a href="/login">Sign In</a>
-            {% endif %}
+            <a class="btn btn-lg upload-btn" href="/data">Upload File</a>
+            <a href="/coauthor" class="btn btn-primary">Co-authorship</a>
+            <a href="/access" class="btn btn-success">reports and statistics</a>
          </span>
-      </div>
-      <div id="pun-intro" class="clearfix"> 
-         <div class="sun-intro"><h3 href="/" style="margin: 14px -183px;" >Drag'n'Drop your BibTeX file onto the graph to open.</h3>
-         <div id="pun-title" style="display:none;">
-            <h1></h1>
+         <div id="fa_right" class="fa_tbMainElement">
          </div>
-         <p id="pun-desc" style="display:none;"></p>
       </div>
    </header>
 <body>
-  <svg height="80%" width="100%"></svg>
+
+
+ hello world!
   
-  <script src="http://d3js.org/d3.v3.js"></script>
-  <script src="./static/scripts/jdenticon-1.3.2.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.3.0/js/md5.min.js"></script>
-  <script src="./static/scripts/parser.js"></script>
-  <script>
+  
 
-    var width = 1200,               // width of the svg (not used correctly)
-    
-        height = 900,               // height of the svg portion (not used correctly)
-    
-        icon_size = 16,             // base size of icons for nodes
-    
-        jdenticon_size = 50        // base size of the identicons, note
-                                    // that jdenticon does not allow
-                                    // images smaller than 30, and padding
-                                    // is added to that, so 40 should be a
-                                    // safe minimum
-    
-    var nodes=[], links=[], tree;
-    var svg = d3.select("svg")
-        .attr("pointer-events", "all")
-        .append("g")
-        .call(d3.behavior.zoom().on('zoom', redraw))
-    ;
-    svg.append("rect")
-        .attr("width", screen.width)
-        .attr("height", screen.height)
-        .style("fill", "none")
-    ;
-    var container = svg.append("g").attr("id","interactivecontainer");
-    var link_container = container.append("g");
-    var node_container = container.append("g");
-    var tooltip = svg.append("rect")
-        .attr("class","tooltip_bg")
-        .attr("id","tooltip_bg")
-        .attr("visibility", "hidden")
-        .attr("rx", 4)
-        .attr("ry", 4)
-        .attr("height",16)
-        .attr("width",52);
-    
-    var tooltip_text = svg.append("text")
-        .attr("class","tooltip_text")
-        .attr("visibility", "hidden");
-    
-    function show_tooltip(d) {
-        if (d.type == "paper") {
-            x = d3.event.clientX;
-            y = d3.event.clientY;
-            tooltip_text
-                .text(`${d.display_title}(${d.year})`)
-                .attr("visibility","visible")
-                .attr("x", x + 11)
-                .attr("y", y + 27);
-            tooltip
-                .attr("visibility","visible")
-                .attr("x", x + 8)
-                .attr("y", y + 14)
-                .attr("width", tooltip_text.node().getComputedTextLength()+8);
-        }
-    }
-    
-    function hide_tooltip(d) {
-        tooltip.attr("visibility", "hidden")
-        tooltip_text.attr("visibility", "hidden")
-    }
-    var defs = d3.select("svg").append("defs");
-    var filter = defs.append("filter")
-        .attr("id", "glow");
-    filter.append("feGaussianBlur")
-        .attr("stdDeviation", "3.5")
-        .attr("result", "coloredBlur");
-    function redraw() {
-        container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale +")");
-        // svg.attr("transform", "translate(" + d3.event.translate + ")");
-    };
-    function update_layout() {
-    
-        update_force_layout();
-    
-    }
-    var force_link,                   // selection of created svg elements for link representation
-    
-        force_node                    // selection of created svg elements for node representation
-    var kx_mul = 0.15,              // multiplier for attractor force in x direction
-    
-        ky_mul = 0.4                // multiplier for attractor force in y direction
-    var force = d3.layout.force()
-        .nodes(nodes)
-        .links(links)
-        .linkStrength(0.5)
-        .gravity(0)
-        .distance(50)
-        .chargeDistance(700)
-        .charge(collab_charge)
-        .friction(0.7)
-        .size([width, height])
-        .on("tick",force_tick);
-    function node_significance(d) {
-        if (d.type == "author")
-            // return icon_size * (1 + (d.balls/20);
-            return (1 + (Math.pow((d.balls-1), 0.8) * 0.5));
-        else
-            return (1 + Math.log10(1 + (d.citations || 0)));
-    }
-    function node_image_size(d) {
-        return icon_size * node_significance(d);
-    };
-    function node_image_offset(d) {
-        return - (node_image_size(d) / 2);
-    }
-    function collab_charge(d) {
-        return (node_significance(d) * -300);
-    }
-    function set_collab_paper_targets(node) {
-        if (node.type == "paper") {
-            // node.y_target = (((2016 - node.year))*20) + 200;
-            node.y_target = (Math.sqrt(2016 - node.year) * 100) + 200;
-            xmin = "A".charCodeAt(0);
-            xmax = "Z".charCodeAt(0);
-            xnode = node.name.toUpperCase().charCodeAt(0);
-            node.x_target = Math.max(((xnode - xmin) / (xmax - xmin)) * width, 1);
-        }
-    }
-    var drag = d3.behavior.drag()
-        .origin(function(d) { return d; })
-        .on("dragstart", dragstarted)
-        .on("drag", dragged)
-        .on("dragend", dragended);
-    function dragstarted(d) {
-        d3.event.sourceEvent.stopPropagation();
-        d3.select(this).classed("dragging", true);
-        // force.d3_layout_forceDragstart(d);
-        d.fixed |= 2; // set bit 2
-    }
-    function dragged(d) {
-        // d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-        // d.x = d3.event.x, d.y = d3.event.y;
-        d.px = d3.event.x, d.py = d3.event.y;
-        force.resume(); // restart annealing
-    }
-    function dragended(d) {
-        d3.select(this).classed("dragging", false);
-        // force.d3_layout_forceDragend(d);
-        d.fixed &= ~6; // unset bits 2 and 3
-    }
-    function highlight_nodes(highlight_p) {
-        return function(d0) {
-            force_node
-                .filter(function(d) {
-                    var match =
-                        ( d == d0) ||
-                        ((d0.type == "paper") && d0.authors.includes(d)) ||
-                        ((d0.type == "author") && d0.papers.includes(d));
-                    return !match;
-                })
-                .classed("faded", highlight_p);
-        }
-    }
-    function update_force_layout() {
-        force.stop();
-    
-        force.links(links)
-            .nodes(nodes);
-    
-        force_link = link_container.selectAll(".link")
-        // .data(force.links(), function(d) {return d.source.name + "-" + d.target.name});
-            .data(force.links());
-    
-        force_link
-            .enter().append("line")
-            .attr("class", "link");
-    
-        force_link.exit().remove();
-    
-        force_node = node_container.selectAll(".node")
-            .data(force.nodes(), function(d) {return d.name+d.state+d.bibtype+d.citations+d.balls});
-        // .data(force.nodes());
-        force_node
-            .enter().append("g")
-            .attr("class", "node")
-            .on("mouseover.tool_tip", show_tooltip)
-            .on("mouseout.tool_tip", hide_tooltip)
-            .on("mouseover.highlight", highlight_nodes(true))
-            .on("mouseout.hightlight", highlight_nodes(false))
-            .call(draw_node)
-            .call(drag)
-        ;
-    
-        force_node.exit().remove();
-    
-        force.start().alpha(1);
-    }
-    function draw_node(node) {
-        node.filter(function(n) {return n.type == "author"})
-            .call(draw_author_node);
-    
-        node.filter(function(n) {return n.type == "paper"})
-            .call(draw_paper_node);
-    
-        node.append("g")
-            .append("a")
-            .attr("target","_blank", function(d) { return "http://scholar.google.com/scholar?q=" + encodeURIComponent(d.name); })
-            .attr("xlink:href",function(d) {
-                if (d.type == "author")
-                    return "http://scholar.google.com/scholar?q=" + encodeURIComponent(d.name)
-                else
-                    return d.key+".pdf"})
-            .append("text")
-            .attr("dx", 12)
-            .attr("dy", 16)
-            .attr("text-anchor", "middle")
-            .text(function(d) { return d.name });
-    }
-    function draw_author_node(node) {
-        node.append("image")
-            .attr("xlink:href", "./static/graph-assets/user.png")
-            .attr("x", node_image_offset)
-            .attr("y", node_image_offset)
-            .attr("width", node_image_size)
-            .attr("height", node_image_size);
-    }
-    function draw_paper_node(node) {
-        // glow
-        // node.append("rect")
-        //     .attr("x", node_image_offset)
-        //     .attr("y", node_image_offset)
-        //     .attr("width", node_image_size)
-        //     .attr("height", node_image_size)
-        //     .attr("class", function(d) {
-        //         var s= "node_bg_glow " + d.type;
-        //         if (d.type == "paper" && d.state) s = s + " " + d.state;
-        //         return s;
-        //     });
-    
-        // white background circle with colored stroke
-        node.append("circle")
-            .attr("r", function(d) {return node_image_size(d) / 2.2})
-            .attr("class", function(d) {
-                var s = `node_bg ${d.type}`;
-                if (d.state) s = s + " " + d.state;
-                return s;
-            })
-        ;
-    
-        //jdenticon for partially read papers
-        node.filter(function(n) { return (n.state && n.state != "unread")})
-            .append("g")
-            .attr("class", "jdenticon")
-            .attr("data-width", jdenticon_size)
-            .attr("data-height", jdenticon_size)
-            .attr("data-jdenticon-hash", function(d) { return md5(d.name)})
-            .attr("transform", function(d) { return "scale(" + node_significance(d) * (icon_size / jdenticon_size)  + ")"; });
-    
-        //type symbols
-        node.append("image")
-            .attr("xlink:href", "graph-assets/note.svg")
-            .attr("class", "pub_type")
-            .attr("x", node_image_offset)
-            .attr("y", node_image_offset)
-            .attr("width", function(d) {return node_image_size(d) / 2.5})
-            .attr("height", function(d) {return node_image_size(d) / 2.5})
-            .attr("visibility", "hidden");
-    
-    }
-    function force_tick(e) {
-        var kx = e.alpha * kx_mul;
-        var ky = e.alpha * ky_mul;
-    
-        nodes.forEach(function(node) {
-            if (node.x_target)
-                node.x += (node.x_target - node.x) * kx;
-            if (node.y_target)
-                node.y += (node.y_target - node.y) * ky;
-        });
-    
-        force_link.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
-    
-        force_node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-    }
-    var controls = d3.select("#footer")
-        .append("div");
-    
-     controls.append("label")
-         .text("Display Type of Publication");
-    
-    // controls.append("input")
-    //     .attr("type", "checkbox")
-    //     // .attr("name", "show_symbols")
-    //     .on("click", toggle_symbols);
-    
-    function toggle_symbols() {
-        if (this.checked)
-            d3.selectAll(".pub_type").attr("visibility", "visible");
-        else
-            d3.selectAll(".pub_type").attr("visibility", "hidden");
-    }
-    d3.select("svg")
-        .on("dragover", function() {
-            d3.event.preventDefault(); })
-        .on("drop", function() {
-            d3.event.preventDefault();
-            var files=d3.event.dataTransfer.files;
-            if (files.length == 1) {
-                var f = files[0];
-                console.log("Filename: " + f.name);
-                console.log("Type: " + f.type);
-                console.log("Size: " + f.size + " bytes");
-                reader.readAsText(f);
-            }
-        });
-    var reader = new FileReader();
-    reader.onload = function(event) {
-        var content = event.target.result;
-        console.log("File loaded");
-        load_bibtex(content);
-    };
-    
-    reader.onerror = function(event) {
-        console.error("Unable to read file (Code: " + event.target.error.code + ")");
-    };
-    function load_bibtex(content) {
-        var entries = parse_bibtex_file(content);
-        var result = analyze_bibtex_entries(entries);
-        nodes = result.nodes;
-        links = result.links;
-    
-        nodes.forEach(function(node) {
-            set_collab_paper_targets(node)  /* set the target coordinates for the papers */
-            if (node.x_target) node.x = node.x_target;
-            if (node.y_target) node.y = node.y_target;
-        });
-    
-        update_layout();
-    }
-    var authors, papers;
-    
-    function analyze_bibtex_entries(entries) {
-        authors = [];
-        papers = [];
-        var links = [];
-        entries.forEach(function(e) {
-            if (!e.bibtex.author) { console.error(`BibTeX entry ${e.key} has no author!`); return;}
-            as = author_ws_cleanup(e.bibtex.author).split(" and ").map(normalize_author).map(find_author);
-            e.authors = as; //replace author list with a list of author objects
-            e.type = "paper";
-            e.name = e.key;
-            if (e.bibtex.state) e.state = e.bibtex.state.toLowerCase();
-            e.citations = parseInt(e.bibtex.note) // this is hardcoded right now according to zotero citations plugin
-            if (!e.bibtex.title) {
-                console.warn(`BibTeX entry ${e.key} has no title, using key instead!`)
-                e.display_title = e.key;
-            } else
-                e.display_title = e.bibtex.title;
-            e.year = parseInt(e.bibtex.year);
-            e.authors.forEach(function(author) {
-                author.papers.push(e);
-                links.push({source: author, target: e});
-                // this one is deprecated once the old json import is phased out:
-                author.balls = (author.balls || 0) + 1;
-            });
-            papers.push(e);
-        });
-        return {nodes: papers.concat(authors), links: links};
-    }
-    function author_ws_cleanup(a) {
-        return a.trim().replace(/\s+/g," ");
-    }
-    function find_author(a) {
-        var found = authors.find(function(item) {
-            return item.last == a.last && item.given == a.given }) ||
-            authors.find(function(item) {
-                return item.last == a.last && item.given[0] == a.given[0]});
-        if (found)
-            return found;
-        else {
-            // initialize author fields here
-            a.papers = [];
-            a.type = "author";
-            a.name = a.last;        // display name
-            if (a.given) a.name = a.name + ", " + a.given;
-            authors.push(a);
-            return a;
-        }
-    }
-    function normalize_author(s) {
-        var c = s.split(", ");
-        if (c.length == 1) {        // no commas?
-            c = c[0].split(" ");    // split by spaces
-            var last = c.pop();
-            return {given: c.join(" "), last: last};
-        } else
-            return {given: c[c.length-1].split(" ")[0], last: c[0]};
-    }
-    var parse_tree;
-    
-    function parse_bibtex_file(content) {
-        try {
-            parse_tree = bibtex_parser.parse(content);
-            return parse_tree;
-        } catch (e) {
-            alert(`Line ${e.location.start.line}, Column ${e.location.start.column}: ${e.message}`);
-            throw(e);
-        }
-    }
-    d3.text("./static/example.bib", function(error, content) {
-        if (error) throw(error);
-        load_bibtex(content);
-    });
-
-  </script>
 </body>
 
 	{% endif %}

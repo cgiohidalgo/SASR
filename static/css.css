@@ -17,14 +17,14 @@ footer {
 	clear: both;
 }
 
-h1 {
+/*h1 {
 	-moz-text-shadow: 1px 1px 5px #000;
 	-webkit-text-shadow: 1px 1px 5px #000;
 	color: #333;
 	font-size: 48px;
 	letter-spacing: .1em;
 	text-shadow: 1px 1px 5px #000;
-}
+}*/
 
 header {
 	/*background: url(../img/background-cabecera.png) repeat-x;*/

@@ -1,4 +1,15 @@
 <html>
+  <style type="text/css">
+  .sars {
+        -moz-text-shadow: 1px 1px 5px #000 !important;
+        -webkit-text-shadow: 1px 1px 5px #000 !important;
+        color: currentColor;
+        font-size: 48px;
+        letter-spacing: .1em;
+        text-shadow: 1px 1px 5px #000;
+        margin: 5px -50px;
+      }
+      </style>
    <head>
       <title>SASR</title>
       <link rel="stylesheet" href="{{ url_for("static", filename="crenesoft.css") }}">
@@ -12,6 +23,7 @@
       <link rel="stylesheet" href="{{ url_for("static", filename="menurapido.css") }}">
       <link rel="stylesheet" href="{{ url_for("static", filename="ghs.css") }}">
       <link rel="stylesheet" href="{{ url_for("static", filename="menu_centro.css") }}">
+      
    </head>
    <header>
       <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
@@ -20,15 +32,14 @@
          <span id="fa_left" class="fa_tbMainElement">
             <a class="menu-login"></a>
             {% if session['logged_in'] %}
-            <a href="/logout">Logout</a> 
-            <p>You're logged in already!</p>
+            <a style="color: red;font-size: medium;" href="/logout">Logout</a> You're logged in already!
             {% else %}
             <a href="/login">Sign In</a>
             {% endif %}
          </span>
       </div>
       <div id="pun-intro" class="clearfix"> 
-         <div class="sun-intro"><h1 href="/" id="VigHub">SASR</h1>
+         <div class="sun-intro"><h1 href="/index.html" class="sars" id="VigHub">SASR</h1>
          <div id="pun-title" style="display:none;">
             <h1></h1>
          </div>
@@ -36,7 +47,7 @@
       </div>
    </header>
    <body>
-      <hr>
+      
       {% block content %}{% endblock %}
    </body>
 

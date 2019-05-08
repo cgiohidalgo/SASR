@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+   
+  {% if data %}
+  <h3>{{data}}</h3>
+  
+  {% else %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  <META HTTP-EQUIV="Expires" CONTENT="-1">
+ 
+  <title>File Uploader and History</title>
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for("static", filename="style_uploader.css") }}">
+</head>
+<header>
+  
+</header>
+<body style="background-color: #4791D2;">
+<form method=post action="/upload" enctype=multipart/form-data>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="glyphicon glyphicon-cloud-upload"></span>
+            <h2>File Uploader</h2>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"></div>
+            </div>
+            <button class="btn btn-lg upload-btn" type="button">Choose file</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input id="upload-input" name="archivo" type="file" accept=".bib, .ris" required='required'"></br>
+  <input type=submit value="Upload File" class="btn btn-success" required = 'required'>
+</form>
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="./static/upload.js" type="text/javascript" ></script> 
+</body>
+
+{% endif %}
+
+{% else %}
+<p>Not login!</p>
+
+{% endif %}
+{% endblock %}

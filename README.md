@@ -29,6 +29,10 @@ source bin/activate
 
 pip install -r requirements.txt
 
+pip install request
+
+Pip install bibtexparser
+
 python app.py
 
 http://localhost:5000

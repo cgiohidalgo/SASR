@@ -691,7 +691,7 @@ PUBVIS = function () {
             //@params.number_of_periods = number
             set_data_period = function ( incoming_dataset, count_clicks , steps, max_number_of_bars, number_of_periods ) {
                 var new_dataset = {}, index_start, index_ende, end_period, start_period;
-                var incoming_dataset, count_clicks , steps, last_step, last_step_difference, max_number_of_bars;
+                var incoming_dataset, count_clicks, steps, last_step, last_step_difference, max_number_of_bars;
 
                 start_period = max_number_of_bars * (-1) - 1;
 
@@ -3123,7 +3123,7 @@ PUBVIS = function () {
                     var count_clicks = 0;             
                     
                     var label_space = 19;
-                    //var max_number_of_bars = 30;
+                    var max_number_of_bars = 30;
                     var steps = 5; //number of years that will be shifted if a button was pushed in the timeline
                     var overlap = 0.5 //percent how much the background div should extend the lable-width
                     var tooltip_subset_height;

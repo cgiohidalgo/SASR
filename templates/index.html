@@ -7,94 +7,60 @@
 	
 	{% else %}
 
-<style>
-
-  html, body { overflow: hidden }
-  svg {
-        position: static;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 90%;
-    }
-  
-  #footer { position: fixed;
-            top: 90%
-          }
-  
-  * {
-      font-family: sans-serif;
-  }
-  .node text {
-      // pointer-events: none;
-      font: 10px sans-serif;
-      -webkit-user-select: none;  /* Chrome all / Safari all */
-      -moz-user-select: none;     /* Firefox all */
-      -ms-user-select: none;      /* IE 10+ */
-      user-select: none;          /* Likely future */
-  }
-  
-  .node_bg {
-      fill: white;
-      stroke-width: 3px;
-      stroke: gray;
-  }
-  
-  .node_bg_glow.paper {
-      opacity: 0.3;
-      filter: url(#glow);
-  }
-  
-  .node_bg.paper.read {
-      stroke:green;
-  }
-  
-  .node_bg.paper.unread {
-      stroke:red;
-  }
-  
-  .node_bg.paper.started {
-      stroke:orange;
-  }
-  
-  .node_bg.paper.overview {
-      stroke:yellow;
-  }
-  
-  .link {
-      stroke: #ccc;
-  }
-  
-  .faded {
-      opacity: 0.5;
-  }
-  
-  .node {
-      transition: opacity 0.2s;
-  }
-  .tooltip_text {
-      font: 12px sans-serif;
-  }
-  
-  .tooltip_bg{
-      fill: white;
-      stroke: black;
-      stroke-width: 1;
-      opacity: 0.85;
-  }
-  #pun-foot {
-background-image: url(http://i.imgur.com/6KaUhrC.jpg);
-display: none;
-padding-top: 33px;
-border-top: 11px solid rgb(216, 41, 41);
-}
-</style>
 
 <head>
       <title>SASR</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
         <META HTTP-EQUIV="Expires" CONTENT="-1">
+        
+
+    <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700,600,900&subset=latin-ext,latin' rel='stylesheet' type='text/css'>includes the Google-fonts [source sans pro]-->
+
+    <script type="text/javascript" src="./static/src/jquery.min.js?version=1"></script><!-- includes jQuery -->
+
+    <script src="./static/src/zotero-bibtex-parse.js?version=1" type="text/javascript"></script> <!--includes parser for converting BibTex files into a JSON format -->
+
+    <script src="./static/src/d3.js?version=1" charset="utf-8"></script> <!-- includes d3 javaScript library-->
+
+    <script src="./static/src/d3.layout.cloud.js?version=1"></script> <!-- includes the used layout for the tag clouds in the pubViz visualization-->
+    <script src="./static/src/pubvis1.js??version=1" type="text/javascript" ></script> 
+     <style type="text/css">
+       
+      #chart {
+        display: none;
+      }
+      #type_chart {
+        display: none;
+      }
+      #pubVis {
+        margin: -20.5% 41% !important;
+    width: 53%;
+    height: 287px;
+    position: static;
+      }
+      #lbl_total_amount{
+        font-weight: 500;
+      }
+
+      #overview{
+
+      }
+     </style>
+     <script type="text/javascript" cache="no">
+        var bib = window.location.search.substr(1);
+        if (! bib) {
+            bib = "./static/upload/1.bib";
+            console.log(bib)
+        }
+
+        $(document).ready(function() {
+            PUBVIS.make_it_all ({
+                target : "#pubvis_container", //the node the pubViz visualization will be appended
+                filename : bib, //the bibTeX filename used for the pubViz visualization
+            });
+        });
+    </script>
 </head>
    <header>
       <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
@@ -103,17 +69,62 @@ border-top: 11px solid rgb(216, 41, 41);
             <a class="btn btn-lg upload-btn" href="/data">Upload File</a>
             <a href="/coauthor" class="btn btn-primary">Co-authorship</a>
             <a href="/access" class="btn btn-success">reports and statistics</a>
+            <a id="pubvis_container"></a> 
+            
          </span>
          <div id="fa_right" class="fa_tbMainElement">
          </div>
       </div>
+      
    </header>
 <body>
 
 
- hello world!
-  
-  
+<div id="contenedor_formulario" class="well">
+ <fieldset class="well well-small">
+
+    <div class="container">   
+        
+          <div class="page ng-scope" ng-view=""><div class="col-md-12 ng-scope">
+         <p></p>
+    <div class="well profile col-md-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                  <b style="color: black;">What is SASR?</b>
+  <hr width="100%">
+SASR (semi-automatic Systematic Review) is a tool that is based on data processing techniques to obtain relationships and statistics from its bibliography of Mendeley, Zootero, JABref, and others.
+
+                </div>
+              </div>
+            </div>
+            <div class="well profile col-md-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+<b style="color: black;">How to use SASR?</b>
+  <hr width="100%">
+<b>1.</b> Upload a .bib or .ris file with the "Upload File" button 
+<hr width="100%">
+<b>2.</b> Press the different buttons to create visualizations and statistics from your uploaded file
+
+                </div></div></div>
+                <div class="well profile col-md-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                  <b style="color: black;">What can be obtained with SASR?</b>
+  <hr width="100%">
+<a class="btn btn-primary"> Co-authorship network button</a> Relationships between authors and papers (click on an author to go to your Google Scholar).
+<hr width="100%">
+<a class="btn btn-success">Reports and statistics button </a>  Articles and authors per year, map of keywords, map of principal authors, type of document (article, book, conference, and others.), finally, each article with its download link.
+                </div></div></div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+    
+    
+
+               
 
 </body>
 

@@ -1,0 +1,44 @@
+Metadata-Version: 2.0
+Name: latexcodec
+Version: 1.0.7
+Summary: A lexer and codec to work with LaTeX code in Python.
+Home-page: https://github.com/mcmtroffaes/latexcodec
+Author: Matthias C. M. Troffaes
+Author-email: matthias.troffaes@gmail.com
+License: MIT
+Download-URL: http://pypi.python.org/pypi/latexcodec
+Platform: any
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Text Processing :: Markup :: LaTeX
+Classifier: Topic :: Text Processing :: Filters
+Requires-Dist: six (>=1.4.1)
+
+* Download: http://pypi.python.org/pypi/latexcodec/#downloads
+
+* Documentation: http://latexcodec.readthedocs.org/
+
+* Development: http://github.com/mcmtroffaes/latexcodec/
+
+.. |travis| image:: https://travis-ci.org/mcmtroffaes/latexcodec.png?branch=develop
+    :target: https://travis-ci.org/mcmtroffaes/latexcodec
+    :alt: travis-ci
+
+.. |coveralls| image:: https://coveralls.io/repos/mcmtroffaes/latexcodec/badge.png?branch=develop
+    :target: https://coveralls.io/r/mcmtroffaes/latexcodec?branch=develop
+    :alt: coveralls.io
+
+
+

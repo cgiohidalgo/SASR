@@ -1,4 +1,5 @@
 import os
+import shlex, subprocess
 from flask import Flask, flash, url_for, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import secure_filename
@@ -115,21 +116,26 @@ def allowed_file(filename):
 
 @app.route("/upload", methods=['POST'])
 def uploader():
- if request.method == 'POST':
- 	if 'archivo' not in request.files:
- 		flash('no file part')
- 		return 
- 	file = request.files['archivo']
- 	if file.filename == '':
- 		flash('No selected file')
- 		return 
- 	if file and allowed_file(file.filename):
- 		filename = secure_filename(file.filename)
- 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
- 		#print("./upload/"+filename)
- 		archivo = "./upload/"+filename
- 		os.rename(archivo, "./static/upload/1.bib")
- return render_template('index.html')
+	 if request.method == 'POST':
+	 	if 'archivo' not in request.files:
+	 		flash('no file part')
+	 		return 
+	 	file = request.files['archivo']
+	 	if file.filename == '':
+	 		flash('No selected file')
+	 		return 
+	 	if file and allowed_file(file.filename):
+	 		filename = secure_filename(file.filename)
+	 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+	 		#print("./upload/"+filename)
+	 		archivo = "./upload/"+filename
+	 		os.rename(archivo, "./static/upload/1.bib")
+	 		#Aqui para ejecutar un comando de python 
+	 		process = subprocess.Popen('python3 bibtex2bibjson.py ../SASR/static/upload/1.bib > ../SASR/static/upload/1.json', shell=True, stdout=subprocess.PIPE)
+	 		process.wait()
+	 	print (process.returncode)
+	 	return render_template('index.html')
+
  #return cosole.log(filename);
 
 #os.rename(a,a1)

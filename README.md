@@ -33,6 +33,8 @@ pip install request
 
 Pip install bibtexparser
 
+pip3 install pandas
+
 python app.py
 
 http://localhost:5000

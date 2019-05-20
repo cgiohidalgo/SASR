@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+   
+  {% if data %}
+
+  
+  {% else %}
+<html>
+<head>
+<title>SASR</title>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+   <script type="text/javascript">
+     google.charts.load('current', {packages: ['treemap']});     
+   </script>
+</head>
+<header>
+      <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
+         <span id="fa_left" class="fa_tbMainElement">
+            <a class="menu-login"></a>
+            <a class="btn btn-lg upload-btn" href="/data">Upload File</a>
+            <a href="/coauthor" class="btn btn-primary">Co-authorship</a>
+            <a href="/access" class="btn btn-success">Reports and statistics</a>
+            <a href="/tree" class="btn btn-info">Radial Tidy Tree</a>
+            <a href="/treemap" class="btn btn-danger">Treemap</a>º
+
+            <a id="pubvis_container"></a> 
+            
+         </span>
+         <div id="fa_right" class="fa_tbMainElement">
+         </div>
+      </div>
+      
+   </header>
+<body>
+<div id="chart_div" style="width: 1350px; height: 650px; margin: 0 auto"></div>
+<script language="JavaScript">
+      function drawChart() {
+         var json = $.ajax({
+            url:"./static/upload/1.json",
+         dataType: "JSON"
+      }).done(function(json){
+
+                  var objetos = [
+              ['Location', 'Parent', 'Market trade volume (size)', 'Market increase/decrease (color)'],
+              ['Keywords',    null,                 0,                               0],
+               ];
+         
+
+            var keys = [];
+            for (let i in json) {
+                var e = json[i];
+                if (e.keywords) {
+                    var keywords = e.keywords.toString().split(',');
+                    keywords.forEach(keyword => {
+                        if (keys.length === 0) {
+                            keys.push({ name: keyword.trim(), parent:'Keywords', value: 1, color:+e.year  });
+                        } else {
+                            var ob = keys.find(o => o.name.toUpperCase() === keyword.trim().toUpperCase());
+                            if (ob) {
+                                ob.value++;
+                            } else {
+                                 keys.push({ name: keyword.trim(), parent:'Keywords', value: 1, color:+e.year  });
+                            }
+                        }
+                    })
+                }
+            }
+       
+        
+           
+        keys.forEach(obj => {
+         objetos.push(Object.values(obj))
+        })
+        console.log(objetos)
+
+        var data = google.visualization.arrayToDataTable(objetos);
+
+        tree = new google.visualization.TreeMap(document.getElementById('chart_div'));
+
+        tree.draw(data, {
+          minColor: '#f00',
+          midColor: '#dd0',
+          maxColor: '#0dd',
+          headerHeight: 15,
+          fontColor: 'black',
+          showScale: false
+        });
+ });
+      }
+
+google.charts.setOnLoadCallback(drawChart);
+</script>
+</body>
+</html>
+{% endif %}
+
+{% else %}
+<p>Not login!</p>
+
+{% endif %}
+{% endblock %}

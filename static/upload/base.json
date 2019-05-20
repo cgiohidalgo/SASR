@@ -1,0 +1,297 @@
+{
+	"name": "Blog",
+	"children": [
+		{
+		   "name": "Electronic commerce",
+		   "children": [
+				{"name": "Digital cash"},
+				{"name": "E-commerce infrastructure"},
+				{"name": "Electronic data interchange"},
+				{"name": "Online shopping"},
+				{"name": "Online banking"},
+				{"name": "Secure online transactions"},
+				{"name": "Online auctions"},
+				{"name": "uno"}
+			]
+		},
+		{
+			"name": "Enterprise information systems",
+			"children": [
+				{"name": "Intranets"},
+				{"name": "Extranets"},
+				{"name": "Enterprise resource planning"},
+				{"name": "Enterprise applications"},
+				{"name": "Data centers"}
+			]
+		},
+		{
+			"name": "Business process management",
+			"children": [
+				{"name": "Business process modeling"},
+				{"name": "Business process management systems"},
+				{"name": "Business process monitoring"},
+				{"name": "Cross-organizational business processes"},
+				{"name": "Business intelligence"}
+			]
+		},
+		{
+			"name": "Enterprise architectures",
+			"children": [
+				{"name": "Enterprise architecture management"},
+				{"name": "Enterprise architecture frameworks"},
+				{"name": "Enterprise architecture modeling"}
+			]
+		},
+		{
+			"name": "dos"
+		},
+		{
+			"name": "Service-oriented architectures"
+		},
+		{
+			"name": "Event-driven architectures"
+		},
+		{
+			"name": "Business rules"
+		},
+		{
+			"name": "Enterprise modeling"
+		},
+		{
+			"name": "Enterprise ontologies, taxonomies and vocabularies"
+		},
+		{
+			"name": "Enterprise data management"
+		},
+		{
+			"name": "Reference models"
+		},
+		{
+			"name": "Business-IT alignment"
+		},
+		{
+			"name": "IT architectures"
+		},
+		{
+			"name": "IT governance"
+		},
+		{
+			"name": "Enterprise computing infrastructures"
+		},
+		{
+			"name": "Enterprise interoperability",
+			"children": [
+				{"name": "Enterprise application integration"},
+				{"name": "Information integration and interoperability"}
+			]
+		},
+		{
+			"name": "Physical sciences and engineering",
+			"children": [
+				{"name": "Aerospace"},
+				{"name": "Avionics"}
+			]
+		},
+		{
+			"name": "Archaeology"
+		},
+		{
+			"name": "Astronomy"
+		},
+		{
+			"name": "Chemistry"
+		},
+		{
+			"name": "Earth and atmospheric sciences",
+			"children": [
+				{"name": "Environmental sciences"}
+			]
+		},
+		{
+			"name": "Engineering",
+			"children": [
+				{"name": "Computer-aided design"}
+			]
+		},
+		{
+			"name": "Physics"
+		},
+		{
+			"name": "Mathematics and statistics"
+		},
+		{
+			"name": "Electronics"
+		},
+		{
+			"name": "Telecommunications",
+			"children": [
+				{"name": "Internet telephony"}
+			]
+		},
+		{
+			"name": "Computational biology",
+			"children": [
+				{"name": "Molecular sequence analysis"},
+				{"name": "Recognition of genes and regulatory elements"},
+				{"name": "Molecular evolution"},
+				{"name": "Computational transcriptomics"},
+				{"name": "Biological networks"},
+				{"name": "Sequencing and genotyping technologies"},
+				{"name": "Imaging"},
+				{"name": "Computational proteomics"},
+				{"name": "Molecular structural biology"},
+				{"name": "Computational genomics"}
+			]
+		},
+		{
+			"name": "Genomics"
+		},
+		{
+			"name": "Systems biology"
+		},
+		{
+			"name": "Consumer health"
+		},
+		{
+			"name": "Health care information systems"
+		},
+		{
+			"name": "Health informatics"
+		},
+		{
+			"name": "Metabolomics / metabonomics"
+		},
+		{
+			"name": "Genetics",
+			"children": [
+				{"name": "Population genetics"},
+				{"name": "Proteomics"},
+				{"name": "Computational proteomics"},
+				{"name": "Transcriptomics"}
+			]
+		},
+		{
+			"name": "Law, social and behavioral sciences",
+			"children": [
+				{"name": "Anthropology"},
+				{"name": "Ethnography"}
+			]
+		},
+		{
+			"name": "Law"
+		},
+		{
+			"name": "Psychology"
+		},
+		{
+			"name": "Economics"
+		},
+		{
+			"name": "Sociology"
+		},
+		{
+			"name": "Computer forensics",
+			"children": [
+				{"name": "Surveillance mechanisms"},
+				{"name": "Investigation techniques"},
+				{"name": "Evidence collection, storage and analysis"},
+				{"name": "Network forensics"},
+				{"name": "System forensics"},
+				{"name": "Data recovery"}
+			]
+		},
+		{
+			"name": "Arts and humanities",
+			"children": [
+				{"name": "Fine arts"},
+				{"name": "Performing arts"},
+				{"name": "Architecture (buildings)"},
+				{"name": "Computer-aided design"}
+			]
+		},
+		{
+			"name": "Language translation",
+			"children": [
+				{"name": "Media arts"},
+				{"name": "Sound and music computing"}
+			]
+		},
+		{
+			"name": "Computers in other domains",
+			"children": [
+				{"name": "Digital libraries and archives"},
+				{"name": "Publishing"},
+				{"name": "Military"},
+				{"name": "Cyberwarfare"},
+				{"name": "Cartography"},
+				{"name": "Agriculture"},
+				{"name": "Computing in government"},
+				{"name": "Voting / election technologies"},
+				{"name": "E-government"}
+			]
+		},
+		{
+			"name": "Personal computers and PC applications",
+			"children": [
+				{"name": "Word processors"},
+				{"name": "Spreadsheets"},
+				{"name": "Computer games"},
+				{"name": "Microcomputers"}
+			]
+		},
+		{
+			"name": "Operations research",
+			"children": [
+				{"name": "Consumer products"},
+				{"name": "Industry and manufacturing"},
+				{"name": "Supply chain management"},
+				{"name": "Command and control"},
+				{"name": "Computer-aided manufacturing"},
+				{"name": "Decision analysis"},
+				{"name": "Multi-criterion optimization and decision-making"},
+				{"name": "Transportation"},
+				{"name": "Forecasting"},
+				{"name": "Marketing"}
+			]
+		},
+		{
+			"name": "Education",
+			"children": [
+				{"name": "Digital libraries and archives"},
+				{"name": "Computer-assisted instruction"},
+				{"name": "Interactive learning environments"},
+				{"name": "Collaborative learning"},
+				{"name": "Learning management systems"},
+				{"name": "Distance learning"},
+				{"name": "E-learning"},
+				{"name": "Computer-managed instruction"}
+			]
+		},
+		{
+			"name": "Document management and text processing",
+			"children": [
+				{"name": "Document searching"},
+				{"name": "Document management"},
+				{"name": "Text editing"},
+				{"name": "Version control"},
+				{"name": "Document metadata"},
+				{"name": "Document capture"},
+				{"name": "Document analysis"},
+				{"name": "Document scanning"},
+				{"name": "Graphics recognition and interpretation"},
+				{"name": "Optical character recognition"},
+				{"name": "Online handwriting recognition"},
+				{"name": "Document preparation"},
+				{"name": "Markup languages"},
+				{"name": "Extensible Markup Language (XML)"},
+				{"name": "Hypertext languages"},
+				{"name": "Annotation"},
+				{"name": "Format and notation"},
+				{"name": "Multi / mixed media creation"},
+				{"name": "Image composition"},
+				{"name": "Hypertext / hypermedia creation"},
+				{"name": "Document scripting languages"}
+			]
+		}
+	]
+}

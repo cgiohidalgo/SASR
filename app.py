@@ -3,13 +3,19 @@ import shlex, subprocess
 from flask import Flask, flash, url_for, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import secure_filename
+from flask_caching import Cache
 
 
 app = Flask(__name__)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['UPLOAD_FOLDER'] = './upload'
 db = SQLAlchemy(app)
 ALLOWED_EXTENSIONS = set(['bib','ris'])
+# change to "redis" and restart to cache again
+
+# some time later
+
 # change to "redis" and restart to cache again
 
 # some time later
@@ -63,6 +69,28 @@ def graphs1():
 			username = getname(request.form['username'])
 			return render_template('coauthor.html', data=getfollowedby(username))
 		return render_template('coauthor.html')
+
+@app.route('/tree', methods=['GET', 'POST'])
+def graphs2():
+	""" Session control"""
+	if not session.get('logged_in'):
+		return render_template('login.html')
+	else:
+		if request.method == 'POST':
+			username = getname(request.form['username'])
+			return render_template('tree.html', data=getfollowedby(username))
+		return render_template('tree.html')
+
+@app.route('/treemap', methods=['GET', 'POST'])
+def graphs3():
+	""" Session control"""
+	if not session.get('logged_in'):
+		return render_template('login.html')
+	else:
+		if request.method == 'POST':
+			username = getname(request.form['username'])
+			return render_template('treemap.html', data=getfollowedby(username))
+		return render_template('treemap.html')
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
@@ -131,8 +159,9 @@ def uploader():
 	 		archivo = "./upload/"+filename
 	 		os.rename(archivo, "./static/upload/1.bib")
 	 		#Aqui para ejecutar un comando de python 
-	 		process = subprocess.Popen('python3 bibtex2bibjson.py ../SASR/static/upload/1.bib > ../SASR/static/upload/1.json', shell=True, stdout=subprocess.PIPE)
-	 		process.wait()
+	 		process = subprocess.Popen('python3 ./static/upload/BIB2CSV.py', shell=True, stdout=subprocess.PIPE)
+	 		#process = subprocess.Popen('python3 bibtex2bibjson.py ../SASR/static/upload/1.bib > ../SASR/static/upload/1.json', shell=True, stdout=subprocess.PIPE)
+	 		
 	 	print (process.returncode)
 	 	return render_template('index.html')
 

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+   
+	{% if data %}
+	
+	{% else %}
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <head>
+    <title>ds3 Charting</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="./static/treetedy/css/styletreetedy.css">
+  </head>
+  <header>
+      <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
+         <span id="fa_left" class="fa_tbMainElement">
+            <a class="menu-login"></a>
+            <a class="btn btn-lg upload-btn" href="/data">Upload File</a>
+            <a href="/coauthor" class="btn btn-primary">Co-authorship</a>
+            <a href="/access" class="btn btn-success">Reports and statistics</a>
+            <a href="/tree" class="btn btn-info">Radial Tidy Tree</a>
+            <a href="/treemap" class="btn btn-danger">Treemap</a>º
+
+            <a id="pubvis_container"></a> 
+         </span>
+         <div id="fa_right" class="fa_tbMainElement">
+         </div>
+      </div>
+      
+   </header>
+  <body>
+    <svg width="1386" height="1386"></svg>
+    <script type="text/javascript" src="./static/treetedy/js/scriptreetedy.js"> </script>
+  </body>
+</html>
+	
+   
+
+{% endif %}
+
+{% else %}
+<p>Not login!</p>
+
+{% endif %}
+{% endblock %}

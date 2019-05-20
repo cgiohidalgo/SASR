@@ -27,13 +27,15 @@ cd venv
 
 source bin/activate
 
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
-pip install request
+pip3 install request
 
-Pip install bibtexparser
+Pip3 install bibtexparser
 
 pip3 install pandas
+
+pip3 install flask_caching
 
 python app.py
 

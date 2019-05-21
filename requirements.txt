@@ -3,4 +3,3 @@ Flask-SQLAlchemy
 request
 bibtexparser
 pandas
-flask_caching

@@ -1,5 +1,0 @@
-Flask
-Flask-SQLAlchemy
-request
-bibtexparser
-pandas

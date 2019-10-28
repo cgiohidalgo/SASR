@@ -1,4 +1,4 @@
-#!/Users/giovanny/Desktop/SASR/venv/bin/python
+#!/var/www/sasr/venv/bin/python
 
 import sys
 import getopt

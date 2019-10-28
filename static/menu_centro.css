@@ -428,7 +428,7 @@ input[type=submit].create,
 
 #plan-selection .plan:hover .button,
 .light-green{
-	background: #428e14 url(i/bg-light-green.png) top repeat-x;
+	background: #428e14 url() top repeat-x;
 }
 
 .red{

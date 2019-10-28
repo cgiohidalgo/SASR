@@ -40,11 +40,11 @@
       <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
          <span id="fa_left" class="fa_tbMainElement">
             <a class="menu-login"></a>
-            <a class="btn btn-lg upload-btn" href="/data">Upload File</a>
-            <a href="/coauthor" class="btn btn-primary">Co-authorship</a>
-            <a href="/access" class="btn btn-success">Reports and statistics</a>
-            <a href="/tree" class="btn btn-info">Radial Tidy Tree</a>
-            <a href="/treemap" class="btn btn-danger">Treemap</a>º
+            <a class="btn btn-lg upload-btn" href={{ url_for('data') }}>Upload File</a>
+            <a href={{ url_for('graphs1') }} class="btn btn-primary">Co-authorship</a>
+            <a href={{ url_for('graphs') }} class="btn btn-success">Reports and statistics</a>
+            <a href={{ url_for('graphs2') }} class="btn btn-info">Radial Tidy Tree</a>
+            <a href={{ url_for('graphs3') }} class="btn btn-danger">Treemap</a>
 
            
          </span>

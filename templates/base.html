@@ -12,18 +12,17 @@
       </style>
    <head>
       <title>SASR</title>
-      <link rel="stylesheet" href="{{ url_for("static", filename="crenesoft.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menu.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="bootstrap.min.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="bootstrap-responsive.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="css.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="docs.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menú-estilo.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menurapido.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="ghs.css") }}">
-      <link rel="stylesheet" href="{{ url_for("static", filename="menu_centro.css") }}">
-      
+      <link rel="stylesheet" href="{{ url_for('static', filename='crenesoft.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='menu.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-responsive.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='docs.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='menu-estilo.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='menurapido.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='ghs.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='menu_centro.css') }}">
    </head>
    <header>
       <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
@@ -32,14 +31,14 @@
          <span id="fa_left" class="fa_tbMainElement">
             <a class="menu-login"></a>
             {% if session['logged_in'] %}
-            <a style="color: red;font-size: medium;" href="/logout">Logout</a> You're logged in already!
+            <a style="color: red;font-size: medium;" href={{ url_for('logout') }}>Logout</a> You're logged in already!
             {% else %}
-            <a href="/login">Sign In</a>
+            <a href={{ url_for('login') }}>Sign In</a>
             {% endif %}
          </span>
       </div>
       <div id="pun-intro" class="clearfix"> 
-         <div class="sun-intro"><h1 href="/index.html" class="sars" id="VigHub">SASR</h1>
+         <div class="sun-intro"><h1 href={{ url_for('home') }} class="sars" id="VigHub">SASR</h1>
          <div id="pun-title" style="display:none;">
             <h1></h1>
          </div>
@@ -47,14 +46,9 @@
       </div>
    </header>
    <body>
-      
-      {% block content %}{% endblock %}
+      {% block content %}
+      {% endblock %}
    </body>
-
-
-
-
-
    <div>
       <div>
           <div>

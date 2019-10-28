@@ -2,10 +2,10 @@
 {% block content %}
 {% if session['logged_in'] %}
    
-	{% if data %}
+  {% if data %}
 
-	
-	{% else %}
+  
+  {% else %}
 
 
 <head>
@@ -17,7 +17,7 @@
 
     <!--<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700,600,900&subset=latin-ext,latin' rel='stylesheet' type='text/css'>includes the Google-fonts [source sans pro]-->
 
-    <script type="text/javascript" src="./static/src/jquery.min.js?version=1"></script><!-- includes jQuery -->
+    <script src="./static/src/jquery.min.js?version=1" type="text/javascript"></script><!-- includes jQuery -->
 
     <script src="./static/src/zotero-bibtex-parse.js?version=1" type="text/javascript"></script> <!--includes parser for converting BibTex files into a JSON format -->
 
@@ -46,6 +46,65 @@
       #overview{
 
       }
+
+
+.modal {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  display: flex;
+  
+  animation: modal 2s 3s forwards;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.contenido {
+  margin: auto;
+  width: 42%;
+  height: 40%;
+  background: white;
+  border-radius: 10px;
+}
+
+#cerrar {
+  display: none;
+}
+
+#cerrar + label {
+  position: fixed;
+  color: #fff;
+  font-size: 25px;
+  z-index: 50;
+  background: darkred;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  right: 150px;
+  top: 150px;
+  cursor: pointer;
+  
+  animation: modal 2s 3s forwards;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#cerrar:checked + label, #cerrar:checked ~ .modal {
+  display: none;
+}
+
+@keyframes modal {
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
      </style>
      <script type="text/javascript" cache="no">
         var bib = window.location.search.substr(1);
@@ -66,11 +125,11 @@
       <div id="fa_toolbar" class="fa_fix fa_toolbar_XL_Sized">
          <span id="fa_left" class="fa_tbMainElement">
             <a class="menu-login"></a>
-            <a class="btn btn-lg upload-btn" href="/data">Upload File</a>
-            <a href="/coauthor" class="btn btn-primary">Co-authorship</a>
-            <a href="/access" class="btn btn-success">Reports and statistics</a>
-            <a href="/tree" class="btn btn-info">Radial Tidy Tree</a>
-            <a href="/treemap" class="btn btn-danger">Treemap</a>º
+            <a href={{ url_for('data') }} class="btn btn-lg upload-btn">Upload File</a>
+            <a href={{ url_for('graphs1') }} class="btn btn-primary">Co-authorship</a>
+            <a href={{ url_for('graphs') }} class="btn btn-success">Reports and statistics</a>
+            <a href={{ url_for('graphs2') }} class="btn btn-info">Radial Tidy Tree</a>
+            <a href={{ url_for('graphs3') }} class="btn btn-danger">Treemap</a>
 
             <a id="pubvis_container"></a> 
             
@@ -119,9 +178,11 @@ SASR (semi-automatic Systematic Review) is a tool that is based on data processi
 <hr width="100%">
 <a class="btn btn-success">Reports and statistics button </a>  Articles and authors per year, map of keywords, map of principal authors, type of document (article, book, conference, and others.), finally, each article with its download link.
 <hr width="100%">
-<a class="btn btn-info">Radial Tidy Tree </a>  description.
+<a class="btn btn-info">Radial Tidy Tree </a> 
+To form this graph, the articles and keywords of each one are identified and classified according to
+  <a href="https://dl.acm.org/ccs/ccs_flat.cfm#">The ACM Computing Classification System (CCS).</a>
 <hr width="100%">
-<a class="btn btn-danger">Treemap </a>  description.
+<a class="btn btn-danger">Treemap </a>  A diagram representing hierarchical data in the form of nested rectangles, the area of each corresponding to its numerical value..
                 </div></div></div>
 
           </div>
@@ -136,7 +197,7 @@ SASR (semi-automatic Systematic Review) is a tool that is based on data processi
 
 </body>
 
-	{% endif %}
+  {% endif %}
 
 {% else %}
 <p>Not login!</p>

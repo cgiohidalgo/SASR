@@ -19,7 +19,7 @@ sudo apt-get install python3-pip*
 
 sudo pip3 install virtualenv* 
 
-virtualenv -p python3 venv*
+virtualenv venv*
 
 * These steps are not necessary if the repository environment is activated.
 
@@ -27,7 +27,15 @@ cd venv
 
 source bin/activate
 
-pip install -r requirements.txt
+pip3 install -r requirements.txt
+
+pip3 install request
+
+Pip3 install bibtexparser
+
+pip3 install pandas
+
+pip3 install flask_caching
 
 python app.py
 

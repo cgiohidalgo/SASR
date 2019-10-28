@@ -1,22 +1,37 @@
 .node circle {
-  fill: #999;
+  /*fill: #999;*/
+	fill: #fff;
+	stroke: steelblue;
+	stroke-width: 1.5px;
 }
 
 .node text {
-  font: 10px sans-serif;
+	font: 11px sans-serif;
 }
 
 .node--internal circle {
-  fill: #555;
+  /*fill: #555;*/
+	fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
 }
 
 .node--internal text {
-  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+	text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
 }
 
 .link {
-  fill: none;
-  stroke: #555;
-  stroke-opacity: 0.4;
-  stroke-width: 1.5px;
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 1.5px;
+}
+
+.gallery {
+    position: relative;
+    width: 1386px;
+    margin: 3% 16%;
+}
+
+#char{
+	margin: 3% 16%;
 }

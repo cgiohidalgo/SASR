@@ -4,28 +4,95 @@
 <p>You're logged in already!</p>
 {% else %}
 
+<head>
+   <style type="text/css">
+      .modal {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.8);
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  display: flex;
+  
+  animation: modal 2s 3s forwards;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.contenido {
+  margin: auto;
+  width: 42%;
+  height: 40%;
+  background: white;
+  border-radius: 10px;
+}
+
+#cerrar {
+  display: none;
+}
+
+#cerrar + label {
+  position: fixed;
+  color: #fff;
+  font-size: 25px;
+  z-index: 50;
+  background: darkred;
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  right: 150px;
+  top: 150px;
+  cursor: pointer;
+  
+  animation: modal 2s 3s forwards;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#cerrar:checked + label, #cerrar:checked ~ .modal {
+  display: none;
+}
+
+@keyframes modal {
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+   </style>
+</head>
+<body>
+   
+  
+
 <p>&nbsp;</p>
 <section id="principal">
    <article>
       <article id="inicio_sesion">
-         <form action="/login" method="POST">
+         <form action={{ url_for('login') }} method="POST">
             <fieldset class="well">
                <a style="font-size: -webkit-xxx-large;color: black; text-shadow: 3px 3px 0px #696;">SASR</a>
                <br><br>
-              <br><br>
-               
+              <br><br>               
                <input type="username" id="email" align="absbottom"  name="username" placeholder="Username" style="margin-left: -6%;" required>
                <br><br>
                <input type="password" name="password" placeholder="Password" id="password" required>
                <br><br>
                <input type="submit" class="btn btn-primary" value="Sign In">
-               <a class="btn btn-success" href="/register">Sign Up</a>
+               <!--<a class="btn btn-success" href="register">Sign Up</a>-->
+               <a class="btn btn-success" href={{ url_for('register') }}>Sign Up</a>
             </fieldset>
          </form>
-         <img class="logotipovighub" src="/static/logo.jpg">
-      </article>
+         <img class="logotipovighub" src={{ url_for('static', filename='logo.jpg') }} >
+         <img class="logotipovighub1" src={{ url_for('static', filename='logouv.jpg') }} >
+      </article> 
    </article>
 </section>
+</body>
 
 {% endif %}
 {% endblock %}

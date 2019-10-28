@@ -17,7 +17,7 @@
             <!--==============================================================-->
             <legend align="center">Account info</legend>
             <div align="center" class="span4">
-               <form action="/register/" data-validate="parsley" method="POST">
+               <form  action={{ url_for('register') }} data-validate="parsley" method="POST">
                   <input type="username" name="username" placeholder="Username" value="" size="32" data-rangelength="[5,10]" class="parsley-validated" style="margin: 10;" required>
                   <input type="password" name="password" placeholder="Password" id="password" data-required="true" data-rangelength="[5,15]" value="" size="32" class="parsley-validated" style="margin: 10;" required>
                   <input type="password" name="password2" id="password3" placeholder="Repeat password" required="" data-equalto="#password" data-error-message="password wrong" style="margin: 10;" class="parsley-validated">
@@ -30,7 +30,8 @@
       </div>
       <div align="right" id="datos_usuario" class="span5">
          <div class="span4">
-            <img class="logogrande" src="/static/logo2.png">
+            <img class="logogrande" src={{ url_for('static', filename='logo2.png') }}>
+
          </div>
       </div>
       <input type="hidden" name="activo" value="1">

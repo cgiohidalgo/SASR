@@ -94,9 +94,9 @@ class BIB2CSV:
 
 
 def main():
-    BIBName = './static/upload/1.bib'
-    CSVName ='./static/upload/CSVFile.csv'
-    JsonName = './static/upload/1.json'
+    BIBName = '/var/www/sasr/static/upload/1.bib'
+    CSVName ='/var/www/sasr/static/upload/CSVFile.csv'
+    JsonName = '/var/www/sasr/static/upload/1.json'
     BibConverter = BIB2CSV(CSVName, BIBName, JsonName)
     BibConverter.make_dict()
     BibConverter.CreateCSV()

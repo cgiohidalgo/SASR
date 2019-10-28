@@ -1,19 +1,23 @@
 $(document).ready(function() {
-	var svg = d3.select("svg"),
-		width = +svg.attr("width"),
-		height = +svg.attr("height"),
-		g = svg.append("g").attr("transform", "translate(" + (width / 2 + 40) + "," + (height / 2 + 90) + ")");
+	var r = 1100 / 2;
 
-	var tree = d3.cluster()
-		.size([360, 500])
+	var tree = d3.layout.tree()
+		.size([360, r - 150])
 		.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
 
-	var stratify = d3.stratify()
-		.parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+	var diagonal = d3.svg.diagonal.radial()
+		.projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+
+	var vis = d3.select("#chart").append("svg:svg")
+		.attr("width", r * 2)
+		.attr("height", r * 2 + 170)
+		.append("svg:g")
+		.attr("transform", "translate(" + r + "," + r + ")");
 
 	var JsonFile = null;	
-	d3.json("./static/upload/1.json", function(error, jsonfile) {
-	  if (error) throw error;
+	
+	d3.json("/uncode/static/upload/1.json", function(jsonfile) {
+	  //if (error) throw error;
 	  
 	  JsonFile = jsonfile;  
 	});
@@ -21,8 +25,8 @@ $(document).ready(function() {
 	var array_palabras = [];
 	var array_obj = [];
 
-	d3.json("./static/upload/base.json", function(error, treeDatas) {
-		if (error) throw error;
+	d3.json("/uncode/static/upload/base.json", function(treeDatas) {
+		//if (error) throw error;
 		
 		//var treeData = treeDatas;
 		var treeDatass = JSON.parse(JSON.stringify(treeDatas));
@@ -32,7 +36,8 @@ $(document).ready(function() {
 		$.each(JsonFile, function(key, val) {
 			if (typeof val.keywords !== 'undefined') {
 				$.each(val.keywords.split(","), function( index, value ) {
-					array_palabras.push([value,val.title]);
+					val.doi!==undefined?array_palabras.push([value,val.doi]):array_palabras.push([value,val.url]);
+					val.url!==undefined?array_palabras.push([value,val.url]):array_palabras.push([value,val.title]);
 				});	
 			}
 		});
@@ -97,40 +102,27 @@ $(document).ready(function() {
 			}
 		});
 	
-		var root = d3.hierarchy(treeData);
-		tree(root);
-
-		var link = g.selectAll(".link")
-			.data(root.descendants().slice(1))
-			.enter().append("path")
+		var nodes = tree.nodes(treeData);
+ 
+		var link = vis.selectAll("path.link")
+			.data(tree.links(nodes))
+			.enter().append("svg:path")
 			.attr("class", "link")
-			.attr("d", function(d) {
-				return "M" + project(d.x, d.y)
-				+ "C" + project(d.x, (d.y + d.parent.y) / 2)
-				+ " " + project(d.parent.x, (d.y + d.parent.y) / 2)
-				+ " " + project(d.parent.x, d.parent.y);
-			});
+			.attr("d", diagonal);
 
-		var node = g.selectAll(".node")
-			.data(root.descendants())
-			.enter().append("g")
-			.attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
-			.attr("transform", function(d) { return "translate(" + project(d.x, d.y) + ")"; });
-
-		node.append("circle")
-		  .attr("r", 2.5);
-		
-		node.append("text")
-		  .attr("dy", ".31em")
-		  .attr("x", function(d) { return d.x < 180 === !d.children ? 6 : -6; })
-		  .style("text-anchor", function(d) { return d.x < 180 === !d.children ? "start" : "end"; })
-		  .attr("transform", function(d) { return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")"; })
-		  //.text(function(d) { return d.id.substring(d.id.lastIndexOf(".") + 1); });
-		  .text(function(d) { return d.data.name });
+		var node = vis.selectAll("g.node")
+			.data(nodes)
+			.enter().append("svg:g")
+			.attr("class", "node")
+			.attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+ 
+		node.append("svg:circle").attr("r", 4.5);
+ 
+		node.append("svg:text")
+			.attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
+			.attr("dy", ".31em")
+			.attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+			.attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
+			.text(function(d) { return d.name; });
 	});
-
-	function project(x, y) {
-		var angle = (x - 90) / 180 * Math.PI, radius = y;
-		return [radius * Math.cos(angle), radius * Math.sin(angle)];
-	}
 });

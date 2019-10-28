@@ -17,18 +17,42 @@
   <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for("static", filename="style_uploader.css") }}">
+  <style type="text/css">
+    .panel {
+    margin-bottom: -68px !important;
+  </style>
 </head>
-<header>
-  
-</header>
+<div class="container">
+    <div class="row">
+      <div class="panel">
+          <div class="panel-body">
+<h2>Download test files for the topic: 
+  <a href="https://drive.google.com/file/d/1kG9yF_8adj-l4k3k6uSkhURhsXy5uLmq/view?usp=sharing" target="_blank">Deep Learning</a>, 
+
+  <a href="https://drive.google.com/file/d/1974VZ21PY5UMx3UIr6zu0z8n4kw4hY7J/view?usp=sharing" target="_blank">
+Quantum Computing</a>,  
+
+<a href="https://drive.google.com/file/d/1b3ECw6TuvOCQlgV2KU_OnlTjlJM-9PID/view?usp=sharing" target="_blank">Programming Learning + CSCL </a>, 
+
+<a href="https://drive.google.com/file/d/1Mzg2XOOqWGFNteKPjJnaIJ7CuvLXByrr/view?usp=sharing" target="_blank">Active Learning</a>, 
+
+<a href="https://drive.google.com/file/d/1-9P274urxOluiyQXAlYoHOwydAkixv0r/view?usp=sharing" target="_blank">Metamodels</a>, 
+
+<a href="https://drive.google.com/file/d/1N4pBoLpjww36c4s0VaxKHqExM2vh-D10/view?usp=sharing" target="_blank">Technology Watch</a>, 
+
+<a href="https://drive.google.com/file/d/1UFJvw3CvaDamDhomlgtMeHnmZqUO_HKy/view?usp=sharing" target="_blank">Complex System</a>.</h2>
 <body style="background-color: #4791D2;">
-<form method=post action="/upload" enctype=multipart/form-data>
+</div>
+</div>
+</div>
+</div>
+<form action={{ url_for('uploader') }} method="POST" enctype="multipart/form-data">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <img class="logotipovighub" src="/static/logo.jpg">
+            <img class="logotipovighub" src={{ url_for('static', filename="logo.jpg") }}>
             <h2>File Uploader</h2>
             <div class="progress">
               <div class="progress-bar" role="progressbar"></div>
@@ -39,13 +63,19 @@
       </div>
     </div>
   </div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
   <input id="upload-input" name="archivo" type="file" accept=".bib, .ris" required='required'"></br>
   <input type=submit value="Upload File" class="btn btn-success" required = 'required'>
 </form>
 
-  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"
+  integrity="sha256-ihAoc6M/JPfrIiIeayPE9xjin4UWjsx2mjW/rtmxLM4="
+  crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="./static/upload.js" type="text/javascript" ></script> 
+  <script src={{ url_for('static', filename="upload.js") }} type="text/javascript" ></script> 
 </body>
 
 {% endif %}

@@ -8,7 +8,7 @@ from functools import wraps, update_wrapper
 from datetime import datetime
 
 
-app = Flask(__name__, static_url_path='/uncode/static')
+app = Flask(__name__, static_url_path='/static')
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 #cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -52,8 +52,8 @@ class User(db.Model):
 		self.password = password
 
 
-@app.route('/uncode', methods=['GET', 'POST'])
-@app.route('/uncode/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 @nocache
 def home():
 	""" Session control"""
@@ -65,7 +65,7 @@ def home():
 			return render_template('index.html', data=getfollowedby(username))
 		return render_template('index.html')
 
-@app.route('/uncode/access', methods=['GET', 'POST'])
+@app.route('/access', methods=['GET', 'POST'])
 @nocache
 def graphs():
 	""" Session control"""
@@ -77,7 +77,7 @@ def graphs():
 			return render_template('access.html', data=getfollowedby(username))
 		return render_template('access.html')
 
-@app.route('/uncode/coauthor', methods=['GET', 'POST'])
+@app.route('/coauthor', methods=['GET', 'POST'])
 @nocache
 def graphs1():
 	""" Session control"""
@@ -89,7 +89,7 @@ def graphs1():
 			return render_template('coauthor.html', data=getfollowedby(username))
 		return render_template('coauthor.html')
 
-@app.route('/uncode/tree', methods=['GET', 'POST'])
+@app.route('/tree', methods=['GET', 'POST'])
 @nocache
 def graphs2():
 	""" Session control"""
@@ -101,7 +101,7 @@ def graphs2():
 			return render_template('tree.html', data=getfollowedby(username))
 		return render_template('tree.html')
 
-@app.route('/uncode/treemap', methods=['GET', 'POST'])
+@app.route('/treemap', methods=['GET', 'POST'])
 @nocache
 def graphs3():
 	""" Session control"""
@@ -113,7 +113,7 @@ def graphs3():
 			return render_template('treemap.html', data=getfollowedby(username))
 		return render_template('treemap.html')
 
-@app.route('/uncode/data', methods=['GET', 'POST'])
+@app.route('/data', methods=['GET', 'POST'])
 @nocache
 def data():
 	""" Session control"""
@@ -126,7 +126,7 @@ def data():
 		return render_template('data.html')
 
 
-@app.route('/uncode/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 @nocache
 def login():
 	"""Login Form"""
@@ -145,7 +145,7 @@ def login():
 		#except:
 		#	return "Dont Login"
 
-@app.route('/uncode/register/', methods=['GET', 'POST'])
+@app.route('/register/', methods=['GET', 'POST'])
 @nocache
 def register():
 	"""Register Form"""
@@ -156,7 +156,7 @@ def register():
 		return render_template('login.html')
 	return render_template('register.html')
 
-@app.route("/uncode/logout")
+@app.route("/logout")
 @nocache
 def logout():
 	"""Logout Form"""
@@ -168,7 +168,7 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/uncode/upload", methods=['POST'])
+@app.route("/upload", methods=['POST'])
 @nocache
 def uploader():
 	if request.method == 'POST':	 	
@@ -182,7 +182,7 @@ def uploader():
 			return render_template('index.html', data=None)
 		else:
 			flash('File not found:)')
-			process = subprocess.Popen('python3 /uncode/static/upload/BIB2CSV.py', shell=True, stdout=subprocess.PIPE)
+			process = subprocess.Popen('python3 /static/upload/BIB2CSV.py', shell=True, stdout=subprocess.PIPE)
 		print (process.returncode)
 			#file = request.files['archivo']
 		return render_template('index.html', data=None)
@@ -212,4 +212,4 @@ if __name__ == '__main__':
 	app.debug = True
 	db.create_all()
 	app.secret_key = "xtjsuA38383"
-	app.run(host='0.0.0.0', port='5000')
+	app.run(host='0.0.0.0', port='80')
